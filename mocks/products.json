@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Um titulo",
+    "price": "12.00"
+  },
+  {
+    "id": 2,
+    "title": "Outro titulo",
+    "price": "10.00"
+  },
+  {
+    "id": 3,
+    "title": "Ainda mais um titulo",
+    "price": "15.00"
+  }
+
+]
