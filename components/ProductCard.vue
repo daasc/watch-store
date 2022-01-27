@@ -23,8 +23,19 @@
       </button>
     </div>
     <div class="px-5 py-3">
-      <h3 class="text-gray-700 uppercase">Classic watch</h3>
-      <span class="text-gray-500 mt-2">$123</span>
+      <h3 class="text-gray-700 uppercase">{{ products.title }}</h3>
+      <span class="text-gray-500 mt-2">${{ products.price }}</span>
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: 'ProductCard',
+  props: {
+    products: {
+      type: Object,
+      required: true,
+    },
+  },
+}
+</script>

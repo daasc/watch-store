@@ -1,3 +1,2 @@
-export const randomNumber = (quantity) => {
-  return Math.floor(Math.random() * quantity) + 1;
-};
+// eslint-disable-next-line prettier/prettier
+export const randomNumber = quantity => Math.floor(Math.random() * quantity) + 1;

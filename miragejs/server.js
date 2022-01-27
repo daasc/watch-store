@@ -5,7 +5,8 @@ import routes from './routes';
 import models from './models';
 import seeds from './seeds';
 
-const config = (environment) => {
+// eslint-disable-next-line prettier/prettier
+const config = environment => {
   const config = {
     environment,
     factories,

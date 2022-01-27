@@ -21,7 +21,6 @@ export default {
     },
     afterCreate(user, server) {
       const messages = server.createList('message', randomNumber(10), { user });
-
       user.update({ messages });
     },
   }),
