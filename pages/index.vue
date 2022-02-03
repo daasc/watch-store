@@ -34,7 +34,7 @@ export default {
     try {
       this.products = (await this.$axios.get('/api/products')).data.products
     } catch (error) {
-      this.errorMessage = 'Error ao carregar carts'
+      this.errorMessage = 'Error the load carts'
     }
   },
 }

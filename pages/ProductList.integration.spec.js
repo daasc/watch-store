@@ -47,4 +47,17 @@ describe('ProductList - Integration', () => {
     const card = wrapper.findAllComponents(ProductCard)
     expect(card).toHaveLength(10)
   })
+
+  it('should display the error message when Promise rejects', async () => {
+    axios.get.mockReturnValue(Promise.reject(new Error('')))
+    const wrapper = mount(ProductList, {
+      mocks: {
+        $axios: axios,
+      },
+    })
+
+    await Vue.nextTick()
+
+    expect(wrapper.text()).toContain('Error the load carts')
+  })
 })
