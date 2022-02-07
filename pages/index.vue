@@ -31,13 +31,6 @@ export default {
       searchTerm: '',
     }
   },
-  async created() {
-    try {
-      this.products = (await this.$axios.get('/api/products')).data.products
-    } catch (error) {
-      this.errorMessage = 'Error the load carts'
-    }
-  },
   computed: {
     listProduct() {
       if (this.searchTerm !== '') {
@@ -47,6 +40,13 @@ export default {
       }
       return this.products
     },
+  },
+  async created() {
+    try {
+      this.products = (await this.$axios.get('/api/products')).data.products
+    } catch (error) {
+      this.errorMessage = 'Error the load carts'
+    }
   },
   methods: {
     setSearchTerm({ term }) {

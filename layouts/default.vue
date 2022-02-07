@@ -31,7 +31,10 @@
             Brand
           </div>
           <div class="flex items-center justify-end w-full">
-            <button class="text-gray-600 focus:outline-none mx-4 sm:mx-0">
+            <button
+              class="text-gray-600 focus:outline-none mx-4 sm:mx-0"
+              @click="toggleCart"
+            >
               <svg
                 class="h-5 w-5"
                 fill="none"
@@ -94,7 +97,8 @@
         </nav>
       </div>
     </header>
-    <!-- <cart /> -->
+    // eslint-disable-next-line vue/attribute-hyphenation
+    <cart :isOpen="isCartOpen" @close="toggleCart" />
     <nuxt />
     <footer class="bg-gray-200">
       <div
@@ -110,8 +114,19 @@
 </template>
 
 <script>
-// import Cart from '@/components/Cart'
-// export default {
-//   components: { Cart },
-// }
+import Cart from '@/components/Cart'
+export default {
+  components: { Cart },
+  data() {
+    return {
+      isCartOpen: false,
+    }
+  },
+
+  methods: {
+    toggleCart() {
+      this.isCartOpen = !this.isCartOpen
+    },
+  },
+}
 </script>
