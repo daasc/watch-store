@@ -97,8 +97,7 @@
         </nav>
       </div>
     </header>
-    // eslint-disable-next-line vue/attribute-hyphenation
-    <cart :isOpen="isCartOpen" @close="toggleCart" />
+    <cart :products="products" :is-open="isCartOpen" @close="toggleCart" />
     <nuxt />
     <footer class="bg-gray-200">
       <div
@@ -114,18 +113,21 @@
 </template>
 
 <script>
+import { cartState } from '@/store'
 import Cart from '@/components/Cart'
 export default {
   components: { Cart },
-  data() {
-    return {
-      isCartOpen: false,
-    }
+  computed: {
+    isCartOpen() {
+      return cartState.open
+    },
+    products() {
+      return cartState.items
+    },
   },
-
   methods: {
     toggleCart() {
-      this.isCartOpen = !this.isCartOpen
+      cartState.open = !cartState.open
     },
   },
 }
