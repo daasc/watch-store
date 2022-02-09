@@ -29,7 +29,7 @@
       :key="product.id"
       :product="product"
     />
-    <h3 v-if="!hasProducts">Cart is empty</h3>
+    <h3 v-if="!hasProducts()">Cart is empty</h3>
     <a
       class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
     >
@@ -68,7 +68,7 @@ export default {
       this.$emit('close')
     },
     hasProducts() {
-      return this.products.length
+      return this.products.length > 0
     },
   },
 }

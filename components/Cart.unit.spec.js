@@ -41,7 +41,7 @@ describe('Cart', () => {
   it('should display "Cart is empty" when there are no products', () => {
     const wrapper = mount(Cart)
 
-    expect(wrapper.text()).not.toContain('Cart is empty')
+    expect(wrapper.text()).toContain('Cart is empty')
   })
 
   it('should display 2 instance of CartItem when 2 products are provides', () => {
