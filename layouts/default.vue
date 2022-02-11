@@ -113,21 +113,27 @@
 </template>
 
 <script>
-import { cartState } from '@/store'
 import Cart from '@/components/Cart'
+import { CartManagers } from '@/managers/CartManagers'
+const cart = new CartManagers()
+
 export default {
   components: { Cart },
   computed: {
     isCartOpen() {
-      return cartState.open
+      return cart.getState().open
     },
     products() {
-      return cartState.items
+      return cart.getState().items
     },
   },
   methods: {
     toggleCart() {
-      cartState.open = !cartState.open
+      if (cart.getState().open) {
+        cart.close()
+      } else {
+        cart.open()
+      }
     },
   },
 }

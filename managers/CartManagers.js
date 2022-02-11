@@ -1,11 +1,11 @@
-import Vue from 'Vue'
+import Vue from 'vue'
 
 const initialState = {
   open: false,
   items: [],
 }
 
-class CartManagers {
+export class CartManagers {
   state
   constructor() {
     this.state = Vue.observable(initialState)
@@ -13,11 +13,15 @@ class CartManagers {
 
   open() {
     this.state.open = true
-    return this.state
+    return this.getState()
   }
 
   close() {
     this.state.open = false
+    return this.getState()
+  }
+
+  getState() {
     return this.state
   }
 
@@ -33,26 +37,24 @@ class CartManagers {
     if (!this.productIsInCart(product)) {
       this.state.items.push(product)
     }
-    return this.state
+    return this.getState()
   }
 
   removeProduct(id) {
     this.state.items = [
       ...this.state.items.filter((product) => product.id !== id),
     ]
-    return this.state
+    return this.getState()
   }
 
   clearProduct() {
     this.state.items = []
-    return this.state
+    return this.getState()
   }
 
   clearCart() {
     this.clearProduct()
     this.close()
-    return this.state
+    return this.getState()
   }
 }
-
-module.exports = CartManagers

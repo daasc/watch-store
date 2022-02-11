@@ -1,5 +1,5 @@
-const CartManagers = require('./CartManagers.js')
-
+// const CartManagers = require('./CartManagers.js')
+import { CartManagers } from './CartManagers.js'
 describe('CartManagers', () => {
   let server
   let cartManagers
@@ -18,6 +18,18 @@ describe('CartManagers', () => {
     const state = cartManagers.close()
     expect(state.open).toBe(false)
   })
+  it('should return the state', () => {
+    const product = server.create('product')
+    cartManagers.open()
+    cartManagers.addProduct(product)
+
+    const state = cartManagers.getState()
+    expect(state).toEqual({
+      items: [product],
+      open: true,
+    })
+  })
+
   it('should add product to the cart only once', () => {
     const product = server.create('product')
     cartManagers.addProduct(product)

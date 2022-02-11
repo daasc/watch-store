@@ -30,7 +30,8 @@
   </div>
 </template>
 <script>
-import { cartState } from '@/store'
+import { CartManagers } from '@/managers/CartManagers'
+const cart = new CartManagers()
 export default {
   name: 'ProductCard',
   props: {
@@ -41,8 +42,8 @@ export default {
   },
   methods: {
     addToCart() {
-      cartState.open = true
-      cartState.items.push(this.products)
+      cart.open()
+      cart.addProduct(this.products)
     },
   },
 }
