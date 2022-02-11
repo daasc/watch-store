@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { mount } from '@vue/test-utils'
 import ProductCard from '@/components/ProductCard.vue'
+import { cartState } from '@/store'
 
 const mountProductCart = () => {
   const product = server.create('product', {
@@ -40,13 +41,10 @@ describe('ProductCard - Unit', () => {
     expect(wrapper.text()).toContain('20.00')
   })
 
-  // eslint-disable-next-line require-await
-  it('should emit the event addToCart with product object when button gets clicked ', async () => {
-    const { wrapper, product } = mountProductCart()
+  it('should add item to cartState on button click', async () => {
+    const { wrapper } = await mountProductCart()
     wrapper.find('button').trigger('click')
 
-    expect(wrapper.emitted().addToCart).toBeTruthy()
-    expect(wrapper.emitted().addToCart.length).toBe(1)
-    expect(wrapper.emitted().addToCart[0]).toEqual([{ product }])
+    expect(cartState.items).toHaveLength(1)
   })
 })
