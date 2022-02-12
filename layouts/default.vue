@@ -114,25 +114,23 @@
 
 <script>
 import Cart from '@/components/Cart'
-import { CartManagers } from '@/managers/CartManagers'
-const cart = new CartManagers()
 
 export default {
   components: { Cart },
   computed: {
     isCartOpen() {
-      return cart.getState().open
+      return this.$cart.getState().open
     },
     products() {
-      return cart.getState().items
+      return this.$cart.getState().items
     },
   },
   methods: {
     toggleCart() {
-      if (cart.getState().open) {
-        cart.close()
+      if (this.$cart.getState().open) {
+        this.$cart.close()
       } else {
-        cart.open()
+        this.$cart.open()
       }
     },
   },
