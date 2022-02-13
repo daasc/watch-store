@@ -1,19 +1,23 @@
 /* eslint-disable no-undef */
 import { mount } from '@vue/test-utils'
 import CartItem from '@/components/CartItem'
-
+import { CartManagers } from '@/managers/CartManagers'
 const mountCartItem = () => {
   const product = server.create('product', {
     title: 'watch',
     price: '20,00',
   })
+  const cartManagers = new CartManagers()
   const wrapper = mount(CartItem, {
     propsData: {
       product,
     },
+    mocks: {
+      $cart: cartManagers,
+    },
   })
 
-  return { wrapper, product }
+  return { wrapper, product, cartManagers }
 }
 
 describe('CartItem', () => {
@@ -75,5 +79,21 @@ describe('CartItem', () => {
     await button.trigger('click')
 
     expect(quantity.text()).toContain('0')
+  })
+
+  it('should display a button to remove item from cart', () => {
+    const { wrapper } = mountCartItem()
+    const button = wrapper.find('[data-testid="remove-button"]')
+
+    expect(button.exists()).toBe(true)
+  })
+  it('should call cart manager removeProduct() when button gets clicked', async () => {
+    const { wrapper, product, cartManagers } = mountCartItem()
+    const spy = jest.spyOn(cartManagers, 'removeProduct')
+    const button = wrapper.find('[data-testid="remove-button"]')
+    await button.trigger('click')
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith(product.id)
   })
 })
